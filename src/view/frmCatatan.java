@@ -17,6 +17,8 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Vector;
 
+
+// Aplikasi GUI sederhana untuk membuat, melihat, mengedit, menghapus,mengimpor, dan mengekspor catatan harian.
 public class frmCatatan extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(frmCatatan.class.getName());
@@ -24,9 +26,9 @@ public class frmCatatan extends javax.swing.JFrame {
     /**
      * Creates new form frmCatatan
      */
-    
+    // Controller untuk berinteraksi dengan database
     private CatatanController controller;
-    private DefaultListModel<Catatan> listModel;
+    private DefaultListModel<Catatan> listModel; // Model untuk JList yang menampilkan daftar catatan
     
     public frmCatatan() {
         initComponents();
@@ -34,8 +36,8 @@ public class frmCatatan extends javax.swing.JFrame {
         listModel = new DefaultListModel<>();
         jList1.setModel(listModel);
         try {
-            controller = new CatatanController();
-            loadListCatatan();
+            controller = new CatatanController(); // Buat instance controller
+            loadListCatatan(); // Load data catatan ke JList
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(this, "Error koneksi database: " + e.getMessage());
         }
@@ -46,7 +48,7 @@ public class frmCatatan extends javax.swing.JFrame {
     private void loadListCatatan() {
         try {
             List<Catatan> list = controller.getAllCatatan();
-            listModel.clear();
+            listModel.clear(); // Kosongkan model sebelum menambahkan data
             for (Catatan c : list) {
                 listModel.addElement(c);
             }
@@ -371,7 +373,7 @@ public class frmCatatan extends javax.swing.JFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
     jTextField1.setText("");
         jTextField2.setText("");
-        jTextArea1.setText("");
+        jTextArea1.setText("");         // Method untuk membersihkan/mengosongkan field
         jTextField1.requestFocus();    // TODO add your handling code here:
     }//GEN-LAST:event_jButton3ActionPerformed
 
@@ -392,6 +394,7 @@ public class frmCatatan extends javax.swing.JFrame {
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(this, "Error menambah catatan: " + e.getMessage());
         }  // TODO add your handling code here:
+            // Method untuk menambahkan catatan baru
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -399,6 +402,7 @@ public class frmCatatan extends javax.swing.JFrame {
     if (c == null) {
         JOptionPane.showMessageDialog(this, "Pilih catatan untuk diedit!");
         return;
+        // Method untuk mengedit catatan dilist yang sudah disimpan
     }
 
     // Isi field
@@ -423,6 +427,7 @@ public class frmCatatan extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Error hapus catatan: " + e.getMessage());
             }
         }   // TODO add your handling code here:
+            // Method untuk menghapus catatan yang telah disimpan dilist
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
@@ -442,6 +447,7 @@ public class frmCatatan extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Error import: " + e.getMessage());
             }
         }    // TODO add your handling code here:
+             // Method untuk mengimport catatan yang tersimpan difile
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
@@ -457,6 +463,7 @@ public class frmCatatan extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Error export: " + e.getMessage());
             }
         }    // TODO add your handling code here:
+                // // Method untuk catatan yang tersimpan dan meyimpannya kefile
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
@@ -468,6 +475,7 @@ public class frmCatatan extends javax.swing.JFrame {
     if (c == null) {
         JOptionPane.showMessageDialog(this, "Pilih catatan yang sedang diedit!");
         return;
+        // Method untuk menyimpan hasil edit list
     }
 
     try {
@@ -492,6 +500,7 @@ public class frmCatatan extends javax.swing.JFrame {
     if (c == null) {
         JOptionPane.showMessageDialog(this, "Pilih catatan dulu!");
         return;
+        // Method untuk melihat isi catatan yang sudah disimpan
     }
 
     jTextField1.setText(c.getTanggal());
@@ -510,6 +519,7 @@ public class frmCatatan extends javax.swing.JFrame {
     if (confirm == JOptionPane.YES_OPTION) {
         System.exit(0);
     }    // TODO add your handling code here:
+        // // Method keluar aplikasi
     }//GEN-LAST:event_jButton9ActionPerformed
 
     /**
